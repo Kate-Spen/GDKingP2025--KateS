@@ -10,6 +10,14 @@ public class BallBehavior : MonoBehaviour
     public float maxSpeed;
     public int secondsToMaxSpeed;
     Vector2 targetPosition;
+    public GameObject target;
+    public float minLaunchSpeed;
+    public float maxLaunchSpped;
+    public float minTimeToLaunch;
+    public float maxTimeToLaunch;
+    public float cooldown;
+    public float launchDuration;
+    public float timeLastLaunch;
     private void Start()
     {
         secondsToMaxSpeed = 30;
@@ -31,18 +39,37 @@ public class BallBehavior : MonoBehaviour
     }
     private void Update()
     {
-        Vector2 currentPosition = transform.position;
-        float distance = Vector2.Distance((Vector2)transform.position, targetPosition);
-        if (distance > 0.1f)
-        {
-            float currentSpeed = Mathf.Lerp(minSpeed, maxSpeed, getDifficultypercentage());
-            currentSpeed = currentSpeed * Time.deltaTime;
-            Vector2 newPosition = Vector2.MoveTowards(currentPosition, targetPosition, currentSpeed);
-            transform.position = newPosition;
-        }
-        else
-        {
-            targetPosition = getRandomPosition();
-        }
+        
     }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+       
+    }
+    //private void FixedUpdate()
+    //{
+    //    Vector2 currentPosition = gameObject.GetComponent<Transform>().position;
+    //    if (onCooldown() == false)
+    //    {
+    //        if (launching == true)
+    //        {
+    //            float currentLaunchTime = Time.time - timeLaunchStart;
+    //            if (currentLaunchTime > launchDuration)
+    //            {
+    //                startCooldown();
+    //            }
+    //        }
+    //        else
+    //        {
+    //            launch();
+    //        }
+    //    }
+    //}
+    //public void launch()
+    //{
+    //    targetPosition = target.transform.position;
+    //        if (launching == false)
+    //    {
+    //        launching = true;
+    //    }
+    //}
 }

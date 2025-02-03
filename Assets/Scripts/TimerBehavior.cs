@@ -4,12 +4,13 @@ using TMPro;
 public class TimerBehavior : MonoBehaviour
 {
     private float timer;
-    private TextMeshProUGUI textField;
+    private TextMeshProUGUI m_text;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        textField = GetComponent<TextMeshProUGUI>();
+        m_text = GetComponent<TextMeshProUGUI>();
+        Component[] cmps = GetComponents<Component>();
     }
 
     // Update is called once per frame
@@ -17,11 +18,12 @@ public class TimerBehavior : MonoBehaviour
     {
         timer = Time.time;
 
-        int minutes = (int)timer / 60;
-        int second = (int)timer % 60;
-
-        string message = string.Format("Time: {0:00}:{1:00}", minutes, second);
-
-        textField.text = message;
+        if (m_text != null)
+        {
+            int minutes = Mathf.FloorToInt(timer / 60);
+            int seconds = Mathf.FloorToInt(timer % 60);
+            string timeLabel = string.Format("<color=black>Time: <color-#0080ff>{0:00}<color=black>:<color=#0080ff>{1:00}", minutes, seconds);
+            m_text.SetText(timeLabel);
+        }
     }
 }
