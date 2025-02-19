@@ -103,8 +103,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
+  baseSpeed: 2
+  dashSpeed: 5
+  dashing: 1
   newPosition: {x: 0, y: 0}
   mousePosG: {x: 0, y: 0, z: 0}
+  dashDuration: 0
+  start: 0
+  timelastDashEnded: 0
 --- !u!50 &7843499537497034359
 Rigidbody2D:
   serializedVersion: 5

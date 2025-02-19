@@ -24,13 +24,15 @@ public class BallBehavior : MonoBehaviour
     public float timeLaunchStart;
     private void Start()
     {
+        rerouting = false;
+        body = GetComponent<Rigidbody2D>();
         initialPosition();
     }
     Vector2 getRandomPosition()
     {
         float randX = Random.Range(minX, maxX);
         float randY = Random.Range(minY, maxY);
-        Debug.Log("rx: " + randX + "ry: " + randY);
+        //Debug.Log("rx: " + randX + "ry: " + randY);
         Vector2 v = new Vector2(randX, randY);
         return v;
     }
@@ -52,8 +54,8 @@ public class BallBehavior : MonoBehaviour
     }
     public void initialPosition()
     {
-        //transform.position = randomPosition();
-        //targetPosition = randomPosition();
+        transform.position = getRandomPosition();
+        targetPosition = getRandomPosition();
         launching = false;
     }
     public void Reroute(Collision2D collision)
@@ -67,7 +69,7 @@ public class BallBehavior : MonoBehaviour
             targetPosition = Vector2.Reflect(targetPosition, contact).normalized;
             launching = false;
             float separationDistance = 0.1f;
-            ballBody.position += contact * separationDistance;
+            body.position += contact * separationDistance;
         }
         else
         {
@@ -92,7 +94,7 @@ public class BallBehavior : MonoBehaviour
             {
                 launch();
             }
-            Vector2 currentPos = gameObject.GetComponent<Transform>().position;
+            Vector2 currentPos = body.position;
             float distance = Vector2.Distance(currentPos, targetPosition);
             if (distance > 0.1)
             {
@@ -112,10 +114,13 @@ public class BallBehavior : MonoBehaviour
                 {
                     currentSpeed = Mathf.Lerp(minSpeed, maxSpeed, difficulty);
                 }
+                Debug.Log("tdt " + Time.deltaTime);
+                Debug.Log("csb " + currentSpeed);
                 currentSpeed = currentSpeed * Time.deltaTime;
+                Debug.Log("csa " + currentSpeed);
                 Vector2 newPosition = Vector2.MoveTowards(currentPos, targetPosition,
                 currentSpeed);
-                transform.position = newPosition;
+                //transform.position = newPosition;
                 body.MovePosition(newPosition);
 
             }
@@ -142,6 +147,7 @@ public class BallBehavior : MonoBehaviour
         targetPosition = targetBody.position;
         if (launching == false)
         {
+            timeLaunchStart = Time.time;
             launching = true;
         }
     }
@@ -166,5 +172,9 @@ public class BallBehavior : MonoBehaviour
         maxX = maX;
         minY = miY;
         maxY = maY;
+    }
+    public void setTarget(GameObject pin)
+    {
+        target = pin;
     }
 }

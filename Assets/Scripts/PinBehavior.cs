@@ -9,24 +9,31 @@ public class PinBehavior : MonoBehaviour
     public Vector2 newPosition;
     public Vector3 mousePosG;
     public float dashDuration;
+    public float timeDashStart;
     public float start;
     //variables for dash cooldown
     public static float cooldownRate = 1.0f;
     public static float cooldown = 0.0f;
     public float timelastDashEnded;
+    Rigidbody2D body;
 
     Camera cam;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start(){
         cam = Camera.main;
+        body = GetComponent<Rigidbody2D>();
+        dashing = false;
     }
 
     // Update is called once per frame
-    void Update(){
+    void Update()
+    {
+        Dash();
+    }
+    void FixedUpdate(){
         mousePosG = cam.ScreenToWorldPoint(Input.mousePosition);
         newPosition = Vector2.MoveTowards(transform.position, mousePosG, speed* Time.fixedDeltaTime);
-        transform.position = newPosition;
-        Dash();
+        body.MovePosition(newPosition);
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -41,12 +48,12 @@ public class PinBehavior : MonoBehaviour
     {
         if (dashing == true)
         {
-            float currenttime = Time.time;
-            float timeDashing = currenttime - start;
-            if (timeDashing > dashDuration)
+            float howLong = Time.time - timeDashStart;
+            if (howLong > dashDuration)
             {
                 dashing = false;
                 speed = baseSpeed;
+                timelastDashEnded = Time.time;
                 cooldown = cooldownRate;
             }
         }

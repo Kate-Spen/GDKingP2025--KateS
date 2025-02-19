@@ -14,13 +14,18 @@ public class SpawningBehavior : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-
+        spawnBall();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        float currentTime = Time.time;
+        float timeElapsed = currentTime - startTime;
+        if (timeElapsed > spawnRatio)
+        {
+            spawnBall();
+        }
     }
    
     void spawnBall()
@@ -29,7 +34,12 @@ public class SpawningBehavior : MonoBehaviour
         if (numVariants > 0)
         {
             int selection = Random.Range(0, numVariants);
-            newObject = Instantiate(ballVariants[selection], new Vector3(0.0f, 0.0f, 0.0f), Quaternion.identity);
+            newObject = Instantiate(ballVariants[selection], new Vector3(0.0f, 0.0f, -0.1f), Quaternion.identity);
+            BallBehavior ballBehavior = newObject.GetComponent<BallBehavior>();
+            ballBehavior.setBounds(minX, maxX, minY, maxY);
+            ballBehavior.setTarget(targetObject);
+            ballBehavior.initialPosition();
         }
+        startTime = Time.time;
     }
 }
