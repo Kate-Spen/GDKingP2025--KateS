@@ -336,7 +336,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7628604564949669396, guid: 63254b5a246d7451ea7454d076deb3d7, type: 3}
       propertyPath: launchDuration
-      value: 100
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7628604564949669396, guid: 63254b5a246d7451ea7454d076deb3d7, type: 3}
       propertyPath: maxLaunchSpeed
@@ -1178,20 +1178,28 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1119617390}
     - target: {fileID: 8323258105457071449, guid: c70df3fce8f5240f5b90a3cf47ce523b, type: 3}
+      propertyPath: maxSpeed
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8323258105457071449, guid: c70df3fce8f5240f5b90a3cf47ce523b, type: 3}
       propertyPath: launchDuration
-      value: 5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8323258105457071449, guid: c70df3fce8f5240f5b90a3cf47ce523b, type: 3}
       propertyPath: maxLaunchSpeed
-      value: 5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8323258105457071449, guid: c70df3fce8f5240f5b90a3cf47ce523b, type: 3}
       propertyPath: maxTimeToLaunch
-      value: 5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8323258105457071449, guid: c70df3fce8f5240f5b90a3cf47ce523b, type: 3}
       propertyPath: minTimeToLaunch
-      value: 5
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8323258105457071449, guid: c70df3fce8f5240f5b90a3cf47ce523b, type: 3}
+      propertyPath: secondsToMaxSpeed
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1624,15 +1632,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3364426314436078450, guid: 706e2ae3c83a44254a231d62b4e2061f, type: 3}
       propertyPath: speed
-      value: 2
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3364426314436078450, guid: 706e2ae3c83a44254a231d62b4e2061f, type: 3}
+      propertyPath: dashing
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3364426314436078450, guid: 706e2ae3c83a44254a231d62b4e2061f, type: 3}
       propertyPath: baseSpeed
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3364426314436078450, guid: 706e2ae3c83a44254a231d62b4e2061f, type: 3}
       propertyPath: dashSpeed
-      value: 15
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 7843499537497034359, guid: 706e2ae3c83a44254a231d62b4e2061f, type: 3}
       propertyPath: m_Constraints

@@ -24,10 +24,7 @@ public class BallBehavior : MonoBehaviour
     public float timeLaunchStart;
     private void Start()
     {
-        secondsToMaxSpeed = 30;
-        minSpeed = 0.75f;
-        maxSpeed = 2.0f;
-        targetPosition = getRandomPosition();
+        initialPosition();
     }
     Vector2 getRandomPosition()
     {
@@ -55,12 +52,9 @@ public class BallBehavior : MonoBehaviour
     }
     public void initialPosition()
     {
-        body = GetComponent<Rigidbody2D>();
-        body.position = getRandomPosition();
-        targetPosition = getRandomPosition();
+        //transform.position = randomPosition();
+        //targetPosition = randomPosition();
         launching = false;
-        rerouting = true;
-
     }
     public void Reroute(Collision2D collision)
     {
@@ -165,5 +159,12 @@ public class BallBehavior : MonoBehaviour
     {
         timeLastLaunch = Time.time;
         launching = false;
+    }
+    public void setBounds(float miX, float maX, float miY, float maY)
+    {
+        minX = miX;
+        maxX = maX;
+        minY = miY;
+        maxY = maY;
     }
 }

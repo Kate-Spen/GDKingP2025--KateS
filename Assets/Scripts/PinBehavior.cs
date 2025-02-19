@@ -34,7 +34,7 @@ public class PinBehavior : MonoBehaviour
         Debug.Log("Collided with " + collided);
         if (collided == "Ball" || collided == "Wall")
         {
-            Debug.Log("Game Over");
+            UnityEngine.SceneManagement.SceneManager.LoadScene("GameOverMenu");
         }
     }
     private void Dash()
