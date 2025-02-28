@@ -11,10 +11,12 @@ public class SpawningBehavior : MonoBehaviour
     public float maxX;
     public float minY;
     public float maxY;
+    public Pins pinsDB;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         spawnBall();
+        spawnPin();
     }
 
     // Update is called once per frame
@@ -41,5 +43,9 @@ public class SpawningBehavior : MonoBehaviour
             ballBehavior.initialPosition();
         }
         startTime = Time.time;
+    }
+    void spawnPin()
+    {
+        targetObject = Instantiate(pinsDB.getPin(CharacterManager.selection).prefab, new Vector3(0.0f, 0.0f, 0.0f), Quaternion.identity);
     }
 }

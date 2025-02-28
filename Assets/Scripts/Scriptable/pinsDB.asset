@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b8cc123e1603437cbfc3b7c64a73282, type: 3}
+  m_Name: pinsDB
+  m_EditorClassIdentifier: 
+  pins:
+  - name: Dog
+    prefab: {fileID: 2543582806019920933, guid: 706e2ae3c83a44254a231d62b4e2061f, type: 3}
+  - name: Frog
+    prefab: {fileID: 1201808890444423157, guid: b8f2e6da166964a44b16066db8fc3a55, type: 3}
+  - name: Future
+    prefab: {fileID: 6101834861256822799, guid: a60fe98b2343d4bbbab9d72d33fcfb12, type: 3}
+  - name: Classic
+    prefab: {fileID: 7536055403894877048, guid: 7323def673db0431d85410b03f460e4d, type: 3}
+  - name: Coke
+    prefab: {fileID: 7553583555905408803, guid: 7630e264c2fef46aaa8768faab0a20dd, type: 3}
+  - name: Ice Cream
+    prefab: {fileID: 5653415937097246362, guid: 18546507068044a658f362207f9f04b4, type: 3}
+  - name: Illuminati
+    prefab: {fileID: 5642591667023766839, guid: 8c5715dd125214b0e86b49d9b08b071c, type: 3}
