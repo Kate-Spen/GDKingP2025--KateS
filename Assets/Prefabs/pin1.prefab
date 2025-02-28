@@ -114,6 +114,7 @@ MonoBehaviour:
   timeDashStart: 0
   start: 0
   timelastDashEnded: 0
+  audioSources: []
 --- !u!50 &7843499537497034359
 Rigidbody2D:
   serializedVersion: 5
@@ -322,7 +323,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: f5dcd2be544244e40a0aa9136224ceab, type: 3}
   m_Resource: {fileID: 8300000, guid: f5dcd2be544244e40a0aa9136224ceab, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -419,7 +420,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: b4f7b1e38a0474b38a012a30ffa2ee04, type: 3}
   m_Resource: {fileID: 8300000, guid: b4f7b1e38a0474b38a012a30ffa2ee04, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0

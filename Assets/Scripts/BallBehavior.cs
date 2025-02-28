@@ -114,10 +114,7 @@ public class BallBehavior : MonoBehaviour
                 {
                     currentSpeed = Mathf.Lerp(minSpeed, maxSpeed, difficulty);
                 }
-                Debug.Log("tdt " + Time.deltaTime);
-                Debug.Log("csb " + currentSpeed);
                 currentSpeed = currentSpeed * Time.deltaTime;
-                Debug.Log("csa " + currentSpeed);
                 Vector2 newPosition = Vector2.MoveTowards(currentPos, targetPosition,
                 currentSpeed);
                 //transform.position = newPosition;

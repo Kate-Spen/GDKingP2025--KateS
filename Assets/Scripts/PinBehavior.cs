@@ -3,85 +3,98 @@ using UnityEngine;
 
 public class PinBehavior : MonoBehaviour
 {
+    public float baseSpeed = 5.0f;
+    public float dashSpeed = 15.0f;
     public float speed;
-    public float baseSpeed = 2.0f;
-    public float dashSpeed = 5.0f;
-    public bool dashing;
-    public Vector2 newPosition;
-    public Vector3 mousePosG;
     public float dashDuration;
     public float timeDashStart;
-    public float start;
-    //variables for dash cooldown
-    public static float cooldownRate = 1.0f;
-    public static float cooldown = 0.0f;
-    public float timelastDashEnded;
-    Rigidbody2D body;
+    public float timeLastDashEnd;
+    public static float cooldownRate = 2;
+    public static float cooldown;
+    private bool gameActive;
     public AudioSource[] audioSources;
 
+
+    Rigidbody2D body;
+    public Vector2 newPosition;
+    public Vector3 mousePosG;
     Camera cam;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start(){
-        cam = Camera.main;
+
+    void Start()
+    {
+        this.gameObject.SetActive(true);
         body = GetComponent<Rigidbody2D>();
-        dashing = false;
+        cam = Camera.main;
+        gameActive = true;
         audioSources = GetComponents<AudioSource>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        Dash();
+        CheckDash();
+        CheckInvincible();
     }
-    void FixedUpdate(){
+
+    void FixedUpdate()
+    {
+        if (!gameActive) return;
         mousePosG = cam.ScreenToWorldPoint(Input.mousePosition);
-        newPosition = Vector2.MoveTowards(transform.position, mousePosG, speed* Time.fixedDeltaTime);
+        newPosition = Vector2.MoveTowards(body.position, mousePosG, speed * Time.fixedDeltaTime);
+
         body.MovePosition(newPosition);
     }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         string collided = collision.gameObject.tag;
+
         if (collided == "Ball" || collided == "Wall")
         {
-            StartCoroutine(WaitForSoundAndTransition());
+            gameActive = false;
+            StartCoroutine(WaitForSoundAndTransition("GameOverMenu"));
         }
     }
-    private IEnumerator WaitForSoundAndTransition()
+
+    private void CheckDash()
     {
-        audioSources[0].Play();
-        yield return new WaitForSeconds(audioSources[0].clip.length);
-        UnityEngine.SceneManagement.SceneManager.LoadScene("GameOver");
-    }
-    private void Dash()
-    {
-        if (dashing == true)
+        if (speed == dashSpeed)
         {
             float howLong = Time.time - timeDashStart;
             if (howLong > dashDuration)
             {
-                dashing = false;
                 speed = baseSpeed;
+                timeLastDashEnd = Time.time;
                 cooldown = cooldownRate;
             }
         }
         else
         {
-            cooldown = cooldown - Time.deltaTime;
-            if(cooldown < 0.0)
+            cooldown -= Time.deltaTime;
+
+            if (cooldown < 0.0)
             {
                 cooldown = 0.0f;
             }
-            if (Input.GetMouseButtonDown(0) == true && cooldown == 0.0)
+
+            if (Input.GetMouseButtonDown(0) && cooldown == 0.0)
             {
-                dashing = true;
                 speed = dashSpeed;
-                start = Time.time;
-                if (audioSources[1].isPlaying)
-                {
-                    audioSources[1].Stop();
-                }
+                timeDashStart = Time.time;
+                if (audioSources[1].isPlaying) audioSources[1].Stop();
                 audioSources[1].Play();
             }
         }
+    }
+
+    private void CheckInvincible()
+    {
+
+    }
+
+    private IEnumerator WaitForSoundAndTransition(string sceneName)
+    {
+        audioSources[0].Play();
+        yield return new WaitForSeconds(audioSources[0].clip.length);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName);
     }
 }

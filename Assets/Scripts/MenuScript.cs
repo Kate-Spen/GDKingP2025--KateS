@@ -6,10 +6,6 @@ public class MenuScript : MonoBehaviour
     public void gotoGame()
     {
         StartCoroutine(WaitForSoundAndTransition("SampleScene"));
-        StartCoroutine(WaitForSoundAndTransition("CharacterSelect"));
-        StartCoroutine(WaitForSoundAndTransition("MainMenu"));
-        StartCoroutine(WaitForSoundAndTransition("GameOverMenu"));
-
     }
     public IEnumerator WaitForSoundAndTransition(string sceneName)
     {

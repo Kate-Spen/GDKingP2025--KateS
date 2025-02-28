@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8293696564075962418}
   m_Layer: 0
   m_Name: ball1
-  m_TagString: Untagged
+  m_TagString: Ball
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -109,7 +109,7 @@ MonoBehaviour:
   minSpeed: 5
   maxSpeed: 10
   secondsToMaxSpeed: 1
-  target: {fileID: 0}
+  target: {fileID: 2543582806019920933, guid: 706e2ae3c83a44254a231d62b4e2061f, type: 3}
   minLaunchSpeed: 10
   maxLaunchSpeed: 15
   minTimeToLaunch: 1
