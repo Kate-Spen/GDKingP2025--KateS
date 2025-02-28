@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class PinBehavior : MonoBehaviour
@@ -16,6 +17,7 @@ public class PinBehavior : MonoBehaviour
     public static float cooldown = 0.0f;
     public float timelastDashEnded;
     Rigidbody2D body;
+    public AudioSource[] audioSources;
 
     Camera cam;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -23,6 +25,7 @@ public class PinBehavior : MonoBehaviour
         cam = Camera.main;
         body = GetComponent<Rigidbody2D>();
         dashing = false;
+        audioSources = GetComponents<AudioSource>();
     }
 
     // Update is called once per frame
@@ -38,11 +41,16 @@ public class PinBehavior : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         string collided = collision.gameObject.tag;
-        Debug.Log("Collided with " + collided);
         if (collided == "Ball" || collided == "Wall")
         {
-            UnityEngine.SceneManagement.SceneManager.LoadScene("GameOverMenu");
+            StartCoroutine(WaitForSoundAndTransition());
         }
+    }
+    private IEnumerator WaitForSoundAndTransition()
+    {
+        audioSources[0].Play();
+        yield return new WaitForSeconds(audioSources[0].clip.length);
+        UnityEngine.SceneManagement.SceneManager.LoadScene("GameOver");
     }
     private void Dash()
     {
@@ -53,7 +61,6 @@ public class PinBehavior : MonoBehaviour
             {
                 dashing = false;
                 speed = baseSpeed;
-                timelastDashEnded = Time.time;
                 cooldown = cooldownRate;
             }
         }
@@ -69,6 +76,11 @@ public class PinBehavior : MonoBehaviour
                 dashing = true;
                 speed = dashSpeed;
                 start = Time.time;
+                if (audioSources[1].isPlaying)
+                {
+                    audioSources[1].Stop();
+                }
+                audioSources[1].Play();
             }
         }
     }

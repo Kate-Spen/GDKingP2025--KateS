@@ -1,21 +1,22 @@
+using System.Collections;
 using UnityEngine;
 
 public class MenuScript : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     public void gotoGame()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene("SampleScene");
+        StartCoroutine(WaitForSoundAndTransition("SampleScene"));
+        StartCoroutine(WaitForSoundAndTransition("CharacterSelect"));
+        StartCoroutine(WaitForSoundAndTransition("MainMenu"));
+        StartCoroutine(WaitForSoundAndTransition("GameOverMenu"));
+
+    }
+    public IEnumerator WaitForSoundAndTransition(string sceneName)
+    {
+        AudioSource audioSource = GetComponentInChildren<AudioSource>();
+        audioSource.Play();
+        yield return new WaitForSeconds(audioSource.clip.length);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName);
     }
     public void gotoCharacter()
     {

@@ -32,6 +32,8 @@ public class CharacterManager : MonoBehaviour
             selection = 0;
         }
         updateCharacter();
+        AudioSource audioSource = GetComponentInChildren<AudioSource>();
+        audioSource.Play();
     }
     public void previous()
     {
@@ -44,5 +46,7 @@ public class CharacterManager : MonoBehaviour
             selection = pinsDB.getCount() - 1;
         }
         updateCharacter();
+        AudioSource audioSource = GetComponentInChildren<AudioSource>();
+        audioSource.Play();
     }
 }
